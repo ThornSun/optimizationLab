@@ -1,5 +1,5 @@
-import numpy as np
+import numpy
 
 
-def tsa(maxiteration, population, demension, fitness):
-    x = np.random.randint(2, size=(population,demension))
+def tsa(maxiteration, population, dimension, objf, lb, ub):
+    x = numpy.random.randint(2, size=(population,dimension))

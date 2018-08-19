@@ -1,7 +1,7 @@
-import numpy as np
+import numpy
 
 
-def ga(maxiteration, population, demension, fitness):
+def ga(maxiteration, population, dimension, objf, lb, ub):
     crossRate = 0.8
     mutationRate = 0.1
-    x = np.random.randint(2, size=(population,demension))
+    x = numpy.random.randint(2, size=(population,dimension))

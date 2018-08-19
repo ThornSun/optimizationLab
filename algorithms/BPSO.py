@@ -1,24 +1,24 @@
-import numpy as np
+import numpy
 import math
 
 
-def bpso(maxiteration, population, demension, fitness):
+def bpso(maxiteration, population, dimension, objf):
     # initialization
     wmax = 0.9
     wmin = 0.4
     c1 = 2
     c2 = 2
     vmax = 6
-    velocity = np.zeros((population, demension))
-    position = np.random.randint(2, size=(population, demension))
-    pbest = np.zeros((population, demension))
-    pbestscore = np.zeros(population)
-    gbest = np.zeros((1, demension))
+    velocity = numpy.zeros((population, dimension))
+    position = numpy.random.randint(2, size=(population, dimension))
+    pbest = numpy.zeros((population, dimension))
+    pbestscore = numpy.zeros(population)
+    gbest = numpy.zeros((1, dimension))
     gbestscore = 0
-    cg_curve = np.zeros((1, maxiteration))
+    cg_curve = numpy.zeros((1, maxiteration))
     for iteration in range(maxiteration):
         for i in range(population):
-            fx = fitness(position[i, :])
+            fx = objf(position[i, :])
             if pbestscore[i] < fx:
                 pbestscore[i] = fx
                 pbest[i, :] = position[i, :]
@@ -28,15 +28,15 @@ def bpso(maxiteration, population, demension, fitness):
         # update the w of PSO
         w = wmax - iteration * ((wmax - wmin) / maxiteration)
         for i in range(population):
-            for j in range(demension):
-                velocity[i, j] = w * velocity[i, j] + c1 * np.random.random() * (
-                        pbest[i, j] - position[i, j]) + c2 * np.random.random() * (gbest[j] - position[i, j])
+            for j in range(dimension):
+                velocity[i, j] = w * velocity[i, j] + c1 * numpy.random.random() * (
+                        pbest[i, j] - position[i, j]) + c2 * numpy.random.random() * (gbest[j] - position[i, j])
                 if velocity[i, j] > vmax:
                     velocity[i, j] = vmax
                 if velocity[i, j] < -vmax:
                     velocity[i, j] = -vmax
                 s = math.fabs((2 / math.pi) * math.atan((math.pi / 2) * velocity[i, j]))
-                if np.random.random() < s:
+                if numpy.random.random() < s:
                     if position[i, j] == 0:
                         position[i, j] = 1
                     else:

@@ -1,5 +1,5 @@
-import numpy as np
+import numpy
 
 
-def abc(maxiteration, population, demension, fitness):
-    x = np.random.randint(2, size=(population,demension))
+def abc(maxiteration, population, dimension, objf, lb, ub):
+    x = numpy.random.randint(2, size=(population,dimension))
